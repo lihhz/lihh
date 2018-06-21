@@ -1,7 +1,7 @@
 /* @flow */
 
 import { addProp } from 'compiler/helpers'
-
+//v-text,使用textContent设置text内容
 export default function text (el: ASTElement, dir: ASTDirective) {
   if (dir.value) {
   // textContent 属性设置或返回指定节点的文本内容，以及它的所有后代。

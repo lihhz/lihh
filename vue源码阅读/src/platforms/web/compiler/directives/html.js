@@ -1,10 +1,10 @@
 /* @flow */
 
 import { addProp } from 'compiler/helpers'
-
+//v-html,使用innerHTML设置html
 export default function html (el: ASTElement, dir: ASTDirective) {
   if (dir.value) {
-    //这里的'_s'是做什么用的？
+    //'_s'参见src\core\instance\render-helpers\index.js
     addProp(el, 'innerHTML', `_s(${dir.value})`)
   }
 }
