@@ -19,6 +19,7 @@ export function genComponentModel (
       `: ${baseValueExpression})`
   }
   if (number) {
+    //TODO:这个_含义是？
     valueExpression = `_n(${valueExpression})`
   }
   const assignment = genAssignmentCode(value, valueExpression)
