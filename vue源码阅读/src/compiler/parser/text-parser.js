@@ -39,6 +39,33 @@ export function parseText (
   }
   const tokens = []
   const rawTokens = []
+  /*
+  RegExp.lastIndex
+
+  只有正则表达式使用了表示全局检索的 "g" 标志时，该属性才会起作用。此时应用下面的规则：
+
+    如果 lastIndex 大于字符串的长度，则 regexp.test 和 regexp.exec 将会匹配失败，然后 lastIndex 被设置为 0。
+    如果 lastIndex 等于字符串的长度，且该正则表达式匹配空字符串，则该正则表达式匹配从 lastIndex 开始的字符串。（then the regular expression matches input starting at lastIndex.）
+    如果 lastIndex 等于字符串的长度，且该正则表达式不匹配空字符串 ，则该正则表达式不匹配字符串，lastIndex 被设置为 0.。
+    否则，lastIndex 被设置为紧随最近一次成功匹配的下一个位置。
+  示例
+
+    考虑下面的语句：
+
+  var re = /(hi)?/g;
+
+    匹配空字符串
+
+    console.log(re.exec("hi"));
+    console.log(re.lastIndex);
+
+    返回 ["hi", "hi"] ，lastIndex 等于 2。
+
+  console.log(re.exec("hi"));
+    console.log(re.lastIndex);
+
+    返回 ["", undefined]，即一个数组，其第 0 个元素为匹配的字符串。此种情况下为空字符串，是因为 lastIndex 为 2（且一直是 2），"hi" 长度为 2。
+    */
   let lastIndex = tagRE.lastIndex = 0
   let match, index, tokenValue
   while ((match = tagRE.exec(text))) {
