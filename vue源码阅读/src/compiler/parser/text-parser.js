@@ -28,7 +28,7 @@ type TextParseResult = {
   expression: string,
   tokens: Array<string | { '@binding': string }>
 }
-
+//解析出{{}}中的内容
 export function parseText (
   text: string,
   delimiters?: [string, string]
@@ -68,15 +68,19 @@ export function parseText (
     */
   let lastIndex = tagRE.lastIndex = 0
   let match, index, tokenValue
+  //exec()在目标字符串中执行一次正则匹配操作。
+  //每执行一次，匹配一次。tagRE.lastIndex会移动到当前匹配出来的字符串末尾位置。match.index则是在匹配出来的字符串起始位置
+  //正常情况下tagRE.lastIndex大于match.index,当整个字符串匹配完成后match为null，tagRE.lastIndex为0
   while ((match = tagRE.exec(text))) {
     index = match.index
     // push text token
+    //TODO：什么时候match.index会大于tagRE.lastIndex呢？
     if (index > lastIndex) {
       rawTokens.push(tokenValue = text.slice(lastIndex, index))
       tokens.push(JSON.stringify(tokenValue))
     }
     // tag token
-    const exp = parseFilters(match[1].trim())
+    const exp = parseFilters(match[1].trim())//从字符串中解析出来真正表达式
     tokens.push(`_s(${exp})`)
     rawTokens.push({ '@binding': exp })
     lastIndex = index + match[0].length

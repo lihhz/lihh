@@ -16,7 +16,10 @@ export function pluckModuleFunction<F: Function> (
     : []
 }
 
+//设置checked之类的？
+//这里只是push，最后怎么设置到具体的元素呢？
 export function addProp (el: ASTElement, name: string, value: string) {
+  //(el.props || (el.props = []))注意这种写法
   (el.props || (el.props = [])).push({ name, value })
   el.plain = false
 }
