@@ -47,8 +47,8 @@ export class Observer {
     this.vmCount = 0
     def(value, '__ob__', this)//设置value的__ob__为this
     if (Array.isArray(value)) {
-      const augment = hasProto
-        ? protoAugment
+      const augment = hasProto//hasProto = '__proto__' in {}
+        ? protoAugment// value.__proto__ = arrayMethods
         : copyAugment
       augment(value, arrayMethods, arrayKeys)
       this.observeArray(value)//监控数组
