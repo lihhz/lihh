@@ -27,6 +27,8 @@ let index = 0
 //重置所有值
 function resetSchedulerState () {
 	//这里的queue.length = activatedChildren.length = 0也是清空数组的一种方式
+  //这种情况方式可能对内存占用有好处（有疑问，因为测试没有测出来，也有可能是我测试方法有问题），但是耗时比=[]更长
+  //目前看来还是=[]更好
   index = queue.length = activatedChildren.length = 0
   has = {}
   if (process.env.NODE_ENV !== 'production') {

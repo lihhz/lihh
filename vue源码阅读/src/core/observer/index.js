@@ -47,6 +47,7 @@ export class Observer {
     this.vmCount = 0
     def(value, '__ob__', this)//设置value的__ob__为this
     if (Array.isArray(value)) {
+      //在ie11 以下，'__proto__' in {}为false
       const augment = hasProto//hasProto = '__proto__' in {}
         ? protoAugment// value.__proto__ = arrayMethods
         : copyAugment
@@ -152,6 +153,8 @@ export function defineReactive (
   customSetter?: ?Function,
   shallow?: boolean
 ) {
+  //set和walk方法最后都调用了defineReactive
+  //因此，obj的每一个属性都对应了一个dep实例
   const dep = new Dep()//注意这个dep是重新new出来的，不是构造函数中传入的。奇怪，为什么不用构造函数中的呢？
 
   //Object.getOwnPropertyDescriptor获取属性的描述信息,这个是和Object.defineProperty有关系的

@@ -47,7 +47,9 @@ export default class Dep {
     }
   }
 
-  //通知订阅者
+  /**
+   * 通知订阅者update
+   */
   notify () {
     // stabilize the subscriber list first
     const subs = this.subs.slice()

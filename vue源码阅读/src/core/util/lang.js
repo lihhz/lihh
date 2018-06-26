@@ -31,7 +31,8 @@ export function parsePath (path: string): any {
     return
   }
   const segments = path.split('.')
-  //这个return 的function很奇怪,没看懂这个obj是什么意思
+  //这个return 的function很奇怪,没看懂这个obj是什么意
+  //应该匹配的是obj.param.func这种吧，找到要执行的方法入口并返回？
   return function (obj) {
     for (let i = 0; i < segments.length; i++) {
       if (!obj) return
